@@ -1,73 +1,36 @@
-var player1 = document.getElementById("player1");
-var player2 = document.getElementById("player2");
-var speel = document.getElementById("speel");
-var keuze1 = "";
-var keuze2 = "";
-player2.style.display = "none";
-speel.style.display = "none";
+let player1 = document.getElementById("player1");
+let player2 = document.getElementById("player2");
 
-function steen1() {
-    keuze1 = "steen";
-    player1.style.display = "none";
-    player2.style.display = "block";
-}
-function papier1() {
-    keuze1 = "papier";
-    player1.style.display = "none";
-    player2.style.display = "block";
-}
-function schaar1() {
-    keuze1 = "schaar";
-    player1.style.display = "none";
-    player2.style.display = "block";
+let keuze1 = "";
+let keuze2 = "";
+
+const resultaat = document.getElementById('winnaar');
+
+function firstpick(keuze, player) {
+    if (player === 1) {
+        keuze1 = keuze;
+        document.getElementById('player1').style.display = 'none';
+        document.getElementById('player2').style.display = 'block';
+    } else {
+        keuze2 = keuze;
+        document.getElementById('player2').style.display = 'none';
+        checkResultaat();
+    }
 }
 
-function steen2() {
-    keuze2 = "steen";
-    player2.style.display = "none";
-    speel.style.display = "block";
+const checkResultaat = () => {
+    let winnaar = '';
+    if (keuze1 === keuze2) {
+      winnaar = 'gelijkspel';
+    } else if (
+      (keuze1 === 'steen' && keuze2 === 'schaar') ||
+      (keuze1 === 'papier' && keuze2 === 'steen') ||
+      (keuze1 === 'schaar' && keuze2 === 'papier')
+    ) {
+      winnaar = 'speler 1 wint';
+    } else {
+      winnaar = 'speler 2 wint';
+    }
+    resultaat.parentElement.style.display = 'block';
+    resultaat.innerHTML = `Het resultaat is: ${winnaar}.`;
 }
-function papier2() {
-    keuze2 = "papier";
-    player2.style.display = "none";
-    speel.style.display = "block";
-}
-function schaar2() {
-    keuze2 = "schaar";
-    player2.style.display = "none";
-    speel.style.display = "block";
-}
-
-function uitslag() {
-    if (keuze1 == "steen" && keuze2 == "steen") {
-        document.getElementById("winnaar").innerHTML = ("gelijkspel");
-    }
-    if (keuze1 == "steen" && keuze2 == "papier") {
-        document.getElementById("winnaar").innerHTML = ("speler 2 wint");
-    }
-    if (keuze1 == "steen" && keuze2 == "schaar") {
-        document.getElementById("winnaar").innerHTML = ("speler 1 wint");
-    }
-
-    if (keuze1 == "papier" && keuze2 == "steen") {
-        document.getElementById("winnaar").innerHTML = ("speler 1 wint");
-    }
-    if (keuze1 == "papier" && keuze2 == "papier") {
-        document.getElementById("winnaar").innerHTML = ("gelijkspel");
-    }
-    if (keuze1 == "papier" && keuze2 == "schaar") {
-        document.getElementById("winnaar").innerHTML = ("speler 2 wint");
-    }
-
-    if (keuze1 == "schaar" && keuze2 == "steen") {
-        document.getElementById("winnaar").innerHTML = ("speler 2 wint");
-    }
-    if (keuze1 == "schaar" && keuze2 == "papier") {
-        document.getElementById("winnaar").innerHTML = ("speler 1 wint");
-    }
-    if (keuze1 == "schaar" && keuze2 == "schaar") {
-        document.getElementById("winnaar").innerHTML = ("gelijkspel");
-    }
-}
-console.log(keuze1);
-console.log(keuze2);
